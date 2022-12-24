@@ -25,6 +25,7 @@ public class UserController {
 		log.debug("用户名:{},邮箱:{},密码:{}",user.getName(),user.getEmail(),user.getPassword());
 		
 		try {
+			//默认设置为普通用户
 			user.setUsertype("normal");
 			userService.register(user);
 		} catch (RuntimeException ex) {
