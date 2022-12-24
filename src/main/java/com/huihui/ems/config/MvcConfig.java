@@ -10,8 +10,10 @@ public class MvcConfig implements WebMvcConfigurer{
 	@Override
 	public void addViewControllers(ViewControllerRegistry registry) {
 		//viewcontroller 请求路径 viewname 跳转视图
-		registry.addViewController("login").setViewName("pages-login");
+		registry.addViewController("login").setViewName("login");
 		
-		registry.addViewController("register").setViewName("pages-register");
+		registry.addViewController("register").setViewName("register");
+		
+		registry.addViewController("book").setViewName("book");
 	}
 }

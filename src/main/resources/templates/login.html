@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+        <!-- 必须的 meta 标签 -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <title>登录</title>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/jquery.slim.min.js"></script>
+    <script src="js/bootstrap.bundle.min.js"></script>
+    
+</head>
+
+<body>
+  <section class="h-100 h-custom" style="background-color: #8fc4b7;">
+    <div class="container py-5 h-100">
+      <div class="row d-flex justify-content-center align-items-center h-100">
+        <div class="col-lg-8 col-xl-6">
+          <div class="card rounded-3">
+            <img src="image/login.jpg"
+              class="w-100" style="border-top-left-radius: .3rem; border-top-right-radius: .3rem;"
+              alt="Sample photo">
+            <div class="card-body p-4 p-md-5">
+              <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">登录</h3>
+  
+              <form class="px-md-2" th:action="@{/user/login/}" method="post">
+  
+                <div class="form-outline mb-4">
+                  <input type="text" id="form3Example1q" class="form-control" name="username"/>
+                  <label class="form-label" for="form3Example1q">用户名</label>
+                </div>
+  
+                <div class="form-outline mb-4">
+                  <input type="password" id="form3Example4c" class="form-control" name="password"/>
+                  <label class="form-label" for="form3Example4c">密码</label>
+                </div>
+  
+                <button type="submit" class="btn btn-success btn-lg mb-1">登录</button>
+  
+              </form>
+  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+    
+</html>
+

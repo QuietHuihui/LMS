@@ -35,15 +35,21 @@ public class User {
 	
 	@Column(name="password")
 	private String password;
+	
+	@Column(name="usertype")
+	private String usertype;
 
-	public User(Integer id, String name, String email, String password) {
+	public User(Integer id, String name, String username, String email, String password, String usertype) {
 		this.id = id;
 		this.name = name;
+		this.username = username;
 		this.email = email;
 		this.password = password;
+		this.usertype = usertype;
 	}
 
 	public User() {
+		
 	}
 
 	public Integer getId() {
@@ -85,6 +91,14 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	
+
+	public String getUsertype() {
+		return usertype;
+	}
+
+	public void setUsertype(String usertype) {
+		this.usertype = usertype;
+	}
+
 	
 }
