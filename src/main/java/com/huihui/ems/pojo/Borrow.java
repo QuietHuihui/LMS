@@ -23,7 +23,6 @@ import org.hibernate.annotations.DynamicUpdate;
 public class Borrow {
 	
 	@Id
-	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "log_id")
     @SequenceGenerator(name = "log_id", initialValue = 1, allocationSize = 1, sequenceName = "SYS_LOG_ID")
 	@Column(name="id")
