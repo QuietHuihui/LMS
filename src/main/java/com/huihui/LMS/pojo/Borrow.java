@@ -1,4 +1,4 @@
-package com.huihui.ems.pojo;
+package com.huihui.LMS.pojo;
 
 import java.sql.Date;
 

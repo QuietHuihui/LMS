@@ -1,4 +1,4 @@
-package com.huihui.ems.pojo;
+package com.huihui.LMS.pojo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

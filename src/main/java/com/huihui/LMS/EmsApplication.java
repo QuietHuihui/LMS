@@ -1,4 +1,4 @@
-package com.huihui.ems;
+package com.huihui.LMS;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

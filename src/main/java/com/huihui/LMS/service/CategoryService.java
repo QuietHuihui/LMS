@@ -1,8 +1,8 @@
-package com.huihui.ems.service;
+package com.huihui.LMS.service;
 
 import org.springframework.ui.Model;
 
-import com.huihui.ems.pojo.Category;
+import com.huihui.LMS.pojo.Category;
 
 public interface CategoryService {
 

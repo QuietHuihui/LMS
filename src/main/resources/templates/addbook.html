@@ -17,9 +17,9 @@
         <div class="col-md-2"></div>
         <div class="col-md-8">
             <h2 class="text-center bg-primary p-2">添加书籍</h2>
-            <form action="" method="POST" enctype="multipart/form-data">
-                <label for="name">书名</label>
-                <input type="text" name="name" placeholder="输入书名" class="form-control">
+            <form th:action="@{/book/addbook}" method="POST" enctype="multipart/form-data">
+                <label for="title">书名</label>
+                <input type="text" name="title" placeholder="输入书名" class="form-control">
                 <label for="isbn">ISBN号</label>
                 <input type="text" name="isbn" placeholder="输入ISBN号" class="form-control">
                 <label for="press">出版社</label>
@@ -30,18 +30,20 @@
                 <input type="text" name="amount" placeholder="输入数量" class="form-control">
     
     
-                <label for="category">添加一个类别</label>
-                <select name="category" id="category" class="form-control" required>
-                    <span th:each="lm:${session.categories}">
+                <label for="tcategory">添加一个类别</label>
+                <select name="tcategory" id="tcategory" class="form-control" required>
+                	<option value="">请选择类别</option>
+                    <!--<span th:each="lm:${session.categories}" th:text>
                     <option value="" th:text="${lm.name}" th.selected="1==1"></option>
-                    </span>
+                    </span>  -->
+                    <option th:each="lm:${session.categories}" th:text="${lm.name}" th:value="${lm.id}" th:name="${lm.id}"></option>
                 </select>
     
                 <div class="container">
                     <div class="row">
                     <div class="col-md-4">
                         <label for="cover">封面</label>
-                        <input type="file" name="cover" accept="image/*" class="form-control" required>
+                        <input type="file" name="photo" accept="image/*" class="form-control" required>
                     </div>
                     </div>    
                 </div>

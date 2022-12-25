@@ -1,4 +1,4 @@
-package com.huihui.ems.controller;
+package com.huihui.LMS.controller;
 
 import javax.servlet.http.HttpSession;
 
@@ -9,8 +9,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.huihui.ems.pojo.User;
-import com.huihui.ems.service.UserService;
+import com.huihui.LMS.pojo.User;
+import com.huihui.LMS.service.UserService;
 
 @Controller
 @RequestMapping("/user")

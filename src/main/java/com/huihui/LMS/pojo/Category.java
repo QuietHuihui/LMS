@@ -1,4 +1,4 @@
-package com.huihui.ems.pojo;
+package com.huihui.LMS.pojo;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -13,7 +13,7 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 @NamedQuery(name="Category.findByName",query="select c from Category c where c.name=:name")
-@NamedQuery(name="Category.getAllCat",query="select new com.huihui.ems.wrapper.CategoryWrapper(c.id,c.name) from Category c")
+@NamedQuery(name="Category.getAllCat",query="select new com.huihui.LMS.wrapper.CategoryWrapper(c.id,c.name) from Category c")
 
 
 @Entity

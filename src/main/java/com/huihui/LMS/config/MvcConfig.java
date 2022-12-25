@@ -1,4 +1,4 @@
-package com.huihui.ems.config;
+package com.huihui.LMS.config;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
@@ -20,6 +20,6 @@ public class MvcConfig implements WebMvcConfigurer{
 		
 		registry.addViewController("getcat").setViewName("category");
 		
-		//registry.addViewController("addbook").setViewName("addbook");
+		registry.addViewController("addbook").setViewName("addbook");
 	}
 }

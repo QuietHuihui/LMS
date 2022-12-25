@@ -1,4 +1,4 @@
-package com.huihui.ems.wrapper;
+package com.huihui.LMS.wrapper;
 
 
 public class CategoryWrapper {

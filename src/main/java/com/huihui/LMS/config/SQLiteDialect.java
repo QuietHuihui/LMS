@@ -1,4 +1,4 @@
-package com.huihui.ems.config;
+package com.huihui.LMS.config;
 
 import org.hibernate.dialect.Dialect;
 import org.hibernate.dialect.function.SQLFunctionTemplate;

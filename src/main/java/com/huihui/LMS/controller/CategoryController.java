@@ -1,4 +1,4 @@
-package com.huihui.ems.controller;
+package com.huihui.LMS.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -7,8 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.huihui.ems.pojo.Category;
-import com.huihui.ems.service.CategoryService;
+import com.huihui.LMS.pojo.Category;
+import com.huihui.LMS.service.CategoryService;
 
 @Controller
 @RequestMapping("/category")

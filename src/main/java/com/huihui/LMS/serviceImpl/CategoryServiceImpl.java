@@ -1,4 +1,4 @@
-package com.huihui.ems.serviceImpl;
+package com.huihui.LMS.serviceImpl;
 
 import java.util.List;
 
@@ -7,10 +7,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.util.ObjectUtils;
 
-import com.huihui.ems.dao.CategoryDao;
-import com.huihui.ems.pojo.Category;
-import com.huihui.ems.service.CategoryService;
-import com.huihui.ems.wrapper.CategoryWrapper;
+import com.huihui.LMS.dao.CategoryDao;
+import com.huihui.LMS.pojo.Category;
+import com.huihui.LMS.service.CategoryService;
+import com.huihui.LMS.wrapper.CategoryWrapper;
 
 @Service
 public class CategoryServiceImpl implements CategoryService{

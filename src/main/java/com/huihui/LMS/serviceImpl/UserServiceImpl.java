@@ -1,4 +1,4 @@
-package com.huihui.ems.serviceImpl;
+package com.huihui.LMS.serviceImpl;
 
 import java.nio.charset.StandardCharsets;
 
@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 import org.springframework.util.ObjectUtils;
 
-import com.huihui.ems.dao.UserDao;
-import com.huihui.ems.pojo.User;
-import com.huihui.ems.service.UserService;
+import com.huihui.LMS.dao.UserDao;
+import com.huihui.LMS.pojo.User;
+import com.huihui.LMS.service.UserService;
 
 @Service
 public class UserServiceImpl implements UserService{

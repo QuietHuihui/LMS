@@ -1,6 +1,6 @@
-package com.huihui.ems.service;
+package com.huihui.LMS.service;
 
-import com.huihui.ems.pojo.User;
+import com.huihui.LMS.pojo.User;
 
 public interface UserService {
 
