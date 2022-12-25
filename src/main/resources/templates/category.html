@@ -28,14 +28,15 @@
                   <a class="nav-link" href="#">借阅信息</a>
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#">Pricing</a>
+                  <a class="nav-link" href="#">通知公告</a>
                 </li>
               </ul>
-              <span class="nav-link navbar-disabled" th:if="${session.user!=null}" th:text="${session.user.username}">
+              
+              您好,<span class="nav-link navbar-disabled" th:if="${session.user!=null}" th:text="${session.user.username}">
               </span>
               <span class="nav-link navbar-disabled" th:if="${session.user==null}">
                   游客
-            </span>
+            </span>!
             </div>
           </nav>
 	</div>

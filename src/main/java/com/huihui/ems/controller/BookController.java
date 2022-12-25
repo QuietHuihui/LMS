@@ -1,7 +1,10 @@
 package com.huihui.ems.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
@@ -15,14 +18,14 @@ public class BookController {
 	@Autowired
 	BookService bookService;
 	
-	@PostMapping("/addbook")
-	public String addBook(Book book) {
+	@RequestMapping("/addbook")
+	public String addBook(Book book,HttpSession session) {
 		try {
-			bookService.addBook(book);
+			bookService.addBook(book,session);
 		}catch(RuntimeException ex) {
 			ex.printStackTrace();
-			return "redirect:/addbook";
+			return "addbook";
 		}
-		return "redirect:/book";
+		return "addbook";
 	}
 }
