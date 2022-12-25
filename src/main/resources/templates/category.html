@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+        <!-- 必须的 meta 标签 -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <title>图书管理系统</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+    <script th:src="@{/js/jquery.slim.min.js}"></script>
+    <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    
+</head>
+<body>
+	<div class="container mt-5">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand navbar-disabled">图书管理系统</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                  <a class="nav-link" href="#">所有书籍</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">借阅信息</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">Pricing</a>
+                </li>
+              </ul>
+              <span class="nav-link navbar-disabled" th:if="${session.user!=null}" th:text="${session.user.username}">
+              </span>
+              <span class="nav-link navbar-disabled" th:if="${session.user==null}">
+                  游客
+            </span>
+            </div>
+          </nav>
+	</div>
+    <div class="container mt-5">
+        <table class="table table-sm table-bordered">
+            <thead>
+                <th>序号</th>
+                <th>类别名</th>
+                <th>编辑</th>
+                <th>删除</th>
+            </thead>
+            <tbody>
+                <tr th:each="categories,stats:${categories}">
+                    <td th:text="${stats.count}">Trident</td>
+                    <td th:text="${categories.name}">Internet</td>
+                    <td><a href="#" class="btn btn-sm btn-primary">编辑</a></td>
+                    <td><a href="#" class="btn btn-sm btn-danger">删除</a></td>
+                  </td>
+                </tr>   
+            </tbody>
+            
+        </table>
+
+        <p><button class="btn btn-warning btn-middle" onclick="addcat()">添加类别</button></p>
+        <script>
+            function addcat(){
+                location.href = '[[@{/addcategory}]]';
+            }
+        </script>
+
+    </div>    
+</body>
+</html>

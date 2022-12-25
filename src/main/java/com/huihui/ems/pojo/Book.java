@@ -20,8 +20,8 @@ import org.hibernate.annotations.DynamicUpdate;
 @Table(name="book")
 public class Book {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "log_id")
-    @SequenceGenerator(name = "log_id", initialValue = 1, allocationSize = 1, sequenceName = "SYS_LOG_ID")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "b_id")
+    @SequenceGenerator(name = "b_id", initialValue = 1, allocationSize = 1, sequenceName = "book_id")
 	@Column(name="id")
 	private Integer id;
 	

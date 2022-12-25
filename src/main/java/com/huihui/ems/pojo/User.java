@@ -21,8 +21,8 @@ import org.hibernate.annotations.DynamicUpdate;
 @Table(name="user")
 public class User {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "log_id")
-    @SequenceGenerator(name = "log_id", initialValue = 1, allocationSize = 1, sequenceName = "SYS_LOG_ID")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "u_id")
+    @SequenceGenerator(name = "u_id", initialValue = 1, allocationSize = 1, sequenceName = "user_id")
 	@Column(name="id")
 	private Integer id;
 	

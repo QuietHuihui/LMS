@@ -13,6 +13,8 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 @NamedQuery(name="Category.findByName",query="select c from Category c where c.name=:name")
+@NamedQuery(name="Category.getAllCat",query="select new com.huihui.ems.wrapper.CategoryWrapper(c.id,c.name) from Category c")
+
 
 @Entity
 @DynamicUpdate
@@ -20,8 +22,8 @@ import org.hibernate.annotations.DynamicUpdate;
 @Table(name="category")
 public class Category {
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "log_id")
-    @SequenceGenerator(name = "log_id", initialValue = 1, allocationSize = 1, sequenceName = "SYS_LOG_ID")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "c_id")
+    @SequenceGenerator(name = "c_id", initialValue = 1, allocationSize = 1, sequenceName = "category_id")
 	@Column(name="id")
 	private Integer id;
 	

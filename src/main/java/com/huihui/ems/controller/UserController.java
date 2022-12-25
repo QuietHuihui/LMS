@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.huihui.ems.pojo.User;
@@ -20,7 +21,7 @@ public class UserController {
 	@Autowired
 	UserService userService;
 	
-	@RequestMapping("/register")
+	@PostMapping("/register")
 	public String register(User user) {
 		log.debug("用户名:{},邮箱:{},密码:{}",user.getName(),user.getEmail(),user.getPassword());
 		
@@ -37,7 +38,7 @@ public class UserController {
 		return "redirect:/login";
 	}
 	
-	@RequestMapping("/login")
+	@PostMapping("/login")
 	public String login(String username,String password,HttpSession session){
 		log.debug("本次登陆的用户名: {}",username);
 		log.debug("本次登陆的密码: {}",password);
