@@ -18,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.ObjectUtils;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
@@ -41,7 +42,7 @@ public class BookController {
 	CategoryDao categoryDao;
 	
 	@Autowired
-	BookDao bookDao;
+	BookService bookService;
 	
 	@RequestMapping("/addbook")
 	public String addBook(Book book,HttpSession session,String tcategory,MultipartFile photo) {
@@ -88,8 +89,15 @@ public class BookController {
 		//设置封面文件名
 		book.setCover(newFilename);
 		//把提交的书本对象存到数据库中
-		bookDao.save(book);
+		bookService.save(book);
 		}
 		return "addbook";
 	}
+	
+	@GetMapping("/getbook")
+	public String getBook(Model model) {
+		bookService.getBook(model);
+		return "book";
+	}
+	
 }

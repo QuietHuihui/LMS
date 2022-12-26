@@ -11,4 +11,8 @@ public interface BookService {
 
 	void addBook(Book book,HttpSession session,MultipartFile photo,String tname);
 
+	void save(Book book);
+
+	void getBook(Model model);
+
 }
