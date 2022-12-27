@@ -10,4 +10,6 @@ public interface CategoryService {
 
 	void getcat(Model model);
 
+	void deleteByID(Integer id);
+
 }

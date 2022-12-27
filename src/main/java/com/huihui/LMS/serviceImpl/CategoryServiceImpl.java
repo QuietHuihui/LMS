@@ -36,4 +36,14 @@ public class CategoryServiceImpl implements CategoryService{
 		model.addAttribute("categories",categories);
 	}
 
+	@Override
+	public void deleteByID(Integer id) {
+		try {
+			categoryDao.deleteById(id);
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		
+	}
+
 }
