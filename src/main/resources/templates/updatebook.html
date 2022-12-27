@@ -16,27 +16,31 @@
     <div class="container">
         <div class="col-md-2"></div>
         <div class="col-md-8">
-            <h2 class="text-center bg-primary p-2">添加书籍</h2>
-            <form th:action="@{/book/addbook}" method="POST" enctype="multipart/form-data">
+            <h2 class="text-center bg-primary p-2">编辑书籍</h2>
+            <form th:action="@{/book/update}" method="POST" enctype="multipart/form-data">
                 <label for="title">书名</label>
-                <input type="text" name="title" placeholder="输入书名" class="form-control">
+                <input type="text" name="title" placeholder="输入书名" class="form-control"
+                th:value="${book.title}">
                 <label for="isbn">ISBN号</label>
-                <input type="text" name="isbn" placeholder="输入ISBN号" class="form-control">
+                <input type="text" name="isbn" placeholder="输入ISBN号" class="form-control"
+                th:value="${book.isbn}">
                 <label for="press">出版社</label>
-                <input type="text" name="press" placeholder="输入出版社" class="form-control">
+                <input type="text" name="press" placeholder="输入出版社" class="form-control"
+                th:value="${book.press}">
                 <label for="author">作者</label>
-                <input type="text" name="author" placeholder="输入作者" class="form-control">
+                <input type="text" name="author" placeholder="输入作者" class="form-control"
+                th:value="${book.author}">
                 <label for="amount">数量</label>
-                <input type="text" name="amount" placeholder="输入数量" class="form-control">
-    
-    			
+                <input type="text" name="amount" placeholder="输入数量" class="form-control"
+                th:value="${book.amount}">
+    	
+    			<input name="id" th:value="${book.id}" style="display:none"></input>
     
                 <label for="tcategory">添加一个类别</label>
-                <select name="tcategory" id="tcategory" class="form-control" required>
-                	<option value="">请选择类别</option>
-                    <!--<span th:each="lm:${session.categories}" th:text>
-                    <option value="" th:text="${lm.name}" th.selected="1==1"></option>
-                    </span>  -->
+                <select name="tcategory" id="tcategory" class="form-control" 
+                required>
+                	<option>请选择一个类别</option>
+                    <option th:text="${book.category.name}" th:value="${book.category.id}" selected = "selected"></option>
                     <option th:each="lm:${session.categories}" th:text="${lm.name}" th:value="${lm.id}" th:name="${lm.id}"></option>
                 </select>
     
@@ -44,12 +48,12 @@
                     <div class="row">
                     <div class="col-md-4">
                         <label for="cover">封面</label>
-                        <input type="file" name="photo" accept="image/*" class="form-control" required>
+                        <input type="file" name="photo" accept="image/*" class="form-control">
                     </div>
                     </div>    
                 </div>
     
-                <button type="submit" class="btn btn-outline-info mt-4">添加书籍</button>
+                <button type="submit" class="btn btn-outline-info mt-4">提交更改</button>
     
             </form>
         </div>

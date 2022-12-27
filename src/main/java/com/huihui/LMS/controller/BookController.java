@@ -115,4 +115,73 @@ public class BookController {
 		return "true";
 	}
 	
+	@RequestMapping("/edit/{id}")
+	public String editBook(@PathVariable("id")Integer id,Model model,HttpSession session){
+		//把类别传入到session中，便于前端展示下拉菜单
+		List<CategoryWrapper>categories = categoryDao.getAllCat();
+		session.setAttribute("categories",categories);
+		Book bk = bookService.findById(id);
+		model.addAttribute("book",bk);
+		return "updatebook";
+	}
+	
+	@PostMapping("/update")
+	@ResponseBody
+	public String updateBook(Book book,String tcategory,MultipartFile photo) {
+		try {
+			System.out.println("this is the book title!"+book.getTitle());
+			
+			System.out.println("catid"+tcategory);
+			Optional<Category> option = categoryDao.findById(Integer.parseInt(tcategory));
+			Category bookcat;
+			bookcat = option.get();
+			
+			//设置书本的Category
+			book.setCategory(bookcat);
+			
+			
+			
+			//如果提交photo为空，不更新封面
+			if(photo.getOriginalFilename().equals("")) {
+				
+				Book bk = bookService.findById(book.getId());
+				book.setCover(bk.getCover());
+			}
+			//如果提交photo不为空，则更新封面
+			else {
+				System.out.println("封面"+photo.getOriginalFilename());
+				//设置保存图片的名称
+				//获取文件原始的名称
+				String originalFilename = photo.getOriginalFilename();
+				//以精确到毫秒的时间作为新的文件名
+				String fileNamePrefix = new SimpleDateFormat("yyyyMMddHHmmssSSS").format(new Date());
+				//获取文件类型字符串
+				String fileNameSuffix = originalFilename.substring(originalFilename.lastIndexOf("."));
+				//拼接得到新的文件名
+				String newFilename = fileNamePrefix+fileNameSuffix;
+			    //保存图片到项目根目录下的"photo"目录下面
+				try {
+					Files.copy(photo.getInputStream(), this.root.resolve(newFilename));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				//删除原来的封面
+				Book bk = bookService.findById(book.getId());
+				if(!(bk.getCover()==null)) {
+					Files.delete(root.resolve(bk.getCover()));
+				}
+				
+				
+				//设置新的封面
+				book.setCover(newFilename);
+			}
+			
+			bookService.updateBook(book);
+			return "true";
+		}catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return null;
+		
+	}
 }
