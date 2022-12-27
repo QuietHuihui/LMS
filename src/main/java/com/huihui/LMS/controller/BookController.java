@@ -106,6 +106,7 @@ public class BookController {
 	@ResponseBody
 	public String deleteCat(@PathVariable("id")Integer id) {
 		try {
+			
 			bookService.deleteByID(id);
 		}catch(Exception ex) {
 			ex.printStackTrace();

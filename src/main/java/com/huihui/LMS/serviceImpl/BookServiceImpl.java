@@ -1,5 +1,9 @@
 package com.huihui.LMS.serviceImpl;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 
@@ -41,6 +45,14 @@ public class BookServiceImpl implements BookService{
 
 	@Override
 	public void deleteByID(Integer id) {
+		Path root = Paths.get("photo");
+		@SuppressWarnings("deprecation")
+		Book bk = bookDao.getById(id);
+		try {
+			Files.delete(root.resolve(bk.getCover()));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		bookDao.deleteById(id);
 		
 	}
