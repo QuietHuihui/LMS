@@ -46,10 +46,39 @@
                                     <button class="btn btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"
                                     >[[${session.user!=null?session.user.username:'游客'}]]
                                     </button>
-                                    <div class="dropdown-menu">
+                                    <div th:if="${session.user!=null}" class="dropdown-menu">
                                       <button class="dropdown-item" type="button">个人信息</button>
-                                      <button class="dropdown-item" type="button">退出</button>
+                                      <button class="dropdown-item" type="button" onclick="logout()">退出</button>
+                                      <script>
+                                          function logout(){
+                                              $.ajax({
+                                                  url:"/user/logout",
+                                                  dataType:"text",
+                                                  type:"GET",
+                                                  success:function(req){
+                                                    location.href = '[[@{/login}]]';
+                                                  }
+                                              });
+                                            
+                                          }
+                                      </script>
                                     </div>
+
+                                    <div th:if="${session.user==null}" class="dropdown-menu">
+                                        <button class="dropdown-item" type="button" onclick="login()">登录</button>
+                                        <script>
+                                            function login(){
+                                                location.href = '[[@{/login}]]';
+                                            }
+                                        </script>
+                                        <button class="dropdown-item" type="button">注册</button>
+                                        <script>
+                                            function register(){
+                                                location.href = '[[@{/register}]]';
+                                            }
+                                        </script>
+                                    </div>
+
                                   </div>
 
                             </div>
@@ -58,6 +87,9 @@
                     <!--导航栏结束-->
                     <div class="tab-content mt-5" id="myTabContent">
                         <div class="tab-pane fade active show" id="home" role="tabpanel">
+                            <div class="mb-2">
+                                <a th:href="@{http://localhost:9999/book/addbook}" class="btn btn-nm btn-success">添加书籍</a>
+                            </div>
                             <div class="table-responsive">
                                 <table class="table">
                                     <thead>
@@ -68,7 +100,7 @@
                                             <th scope="col">作者</th>
                                             <th scope="col">类别</th>
                                             <th scope="col">数量</th>
-                                            <th scope="col">操作</th>
+                                            <th class="text-center" scope="col">操作</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -113,8 +145,10 @@
                                                 </div>
                                             </td>
                                             <td>
-                                                <div class="r-no">
+                                                <div class="r-no text-center">
                                                     <a class="btn btn-primary btn-sm" href="#">借阅</a>
+                                                    <a class="btn btn-warning btn-sm" href="#">编辑</a>
+                                                    <a class="btn btn-danger btn-sm" href="#">删除</a>
                                                 </div>
                                             </td>
                                         </tr>

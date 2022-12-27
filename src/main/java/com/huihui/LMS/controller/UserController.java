@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.huihui.LMS.pojo.User;
 import com.huihui.LMS.service.UserService;
@@ -53,5 +54,17 @@ public class UserController {
 		}
 		return "redirect:/book/getbook";
 		
+	}
+	
+	@PostMapping("/logout")
+	@ResponseBody
+	public String logout(HttpSession session) {
+		try {
+			session.removeAttribute("user");
+			return "true";
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return "false";
 	}
 }
