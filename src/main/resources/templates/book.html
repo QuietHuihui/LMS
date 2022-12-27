@@ -148,7 +148,27 @@
                                                 <div class="r-no text-center">
                                                     <a class="btn btn-primary btn-sm" href="#">借阅</a>
                                                     <a class="btn btn-warning btn-sm" href="#">编辑</a>
-                                                    <a class="btn btn-danger btn-sm" href="#">删除</a>
+                                                    <button th:id="${book.id}" class="btn btn-danger btn-sm" th:onclick="deleteBook(this.getAttribute('id'))">删除</button>
+                                                    <script>
+                                                	function deleteBook(id){
+                                                		$.ajax({
+                                                      url:"./delete/"+id,
+                                                      dataType:"text",
+                                                      type:"GET",
+                                                      success:function(req){
+                                                        //获取返回信息
+                                                        if(req=="true"){
+                                                          alert("删除成功"),
+                                                          $("#"+id).parent().remove()
+                                                        }
+                                                      },
+                                                      //成功删除后刷新页面
+                                                		success:function(){
+                                                			location.href='[[@{/book/getbook}]]'
+                                                		}
+                                                    });
+                                                	}
+                                                    </script>
                                                 </div>
                                             </td>
                                         </tr>

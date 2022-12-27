@@ -15,4 +15,6 @@ public interface BookService {
 
 	void getBook(Model model);
 
+	void deleteByID(Integer id);
+
 }

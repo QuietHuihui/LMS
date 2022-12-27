@@ -19,8 +19,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.ObjectUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.huihui.LMS.dao.BookDao;
@@ -98,6 +100,18 @@ public class BookController {
 	public String getBook(Model model) {
 		bookService.getBook(model);
 		return "book";
+	}
+	
+	@GetMapping("/delete/{id}")
+	@ResponseBody
+	public String deleteCat(@PathVariable("id")Integer id) {
+		try {
+			bookService.deleteByID(id);
+		}catch(Exception ex) {
+			ex.printStackTrace();
+			return "false";
+		}
+		return "true";
 	}
 	
 }
