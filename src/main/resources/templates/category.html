@@ -66,10 +66,8 @@
                           success:function(req){
                             //获取返回信息
                             if(req=="true"){
-                              alert("删除成功")
+                              alert("删除成功"),
                               $("#"+id).parent().remove()
-                            }else{
-                              alert("删除失败")
                             }
                           },
                           //成功删除后刷新页面

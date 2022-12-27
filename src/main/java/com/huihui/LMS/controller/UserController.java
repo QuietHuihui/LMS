@@ -51,7 +51,7 @@ public class UserController {
 			ex.printStackTrace();
 			return "redirect:/login";
 		}
-		return "redirect:/book";
+		return "redirect:/book/getbook";
 		
 	}
 }

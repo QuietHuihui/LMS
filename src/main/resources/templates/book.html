@@ -37,13 +37,21 @@
                                 <li class="nav-item">
                                   <a class="nav-link" href="#">通知公告</a>
                                 </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" th:href="@{'http://localhost:9999/category/getcat'}">类别管理</a>
+                                </li>
                               </ul>
-                              
-                              您好,<span class="nav-link navbar-disabled" th:if="${session.user!=null}" th:text="${session.user.username}">
-                              </span>
-                              <span class="nav-link navbar-disabled" th:if="${session.user==null}">
-                                  游客
-                            </span>!
+
+                                <div class="dropdown">
+                                    <button class="btn btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"
+                                    >[[${session.user!=null?session.user.username:'游客'}]]
+                                    </button>
+                                    <div class="dropdown-menu">
+                                      <button class="dropdown-item" type="button">个人信息</button>
+                                      <button class="dropdown-item" type="button">退出</button>
+                                    </div>
+                                  </div>
+
                             </div>
                           </nav>
                     </div>
