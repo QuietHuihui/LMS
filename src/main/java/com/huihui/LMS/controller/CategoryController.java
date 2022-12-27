@@ -63,9 +63,8 @@ public class CategoryController {
 	}
 	
 	@RequestMapping("update")
-	@ResponseBody
 	public String updateCat(String name,Integer id) {
 		categoryService.updateCat(name,id);
-		return "true";
+		return "redirect:/category/getcat";
 	}
 }

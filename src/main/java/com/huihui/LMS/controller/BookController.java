@@ -126,7 +126,6 @@ public class BookController {
 	}
 	
 	@PostMapping("/update")
-	@ResponseBody
 	public String updateBook(Book book,String tcategory,MultipartFile photo) {
 		try {
 			System.out.println("this is the book title!"+book.getTitle());
@@ -177,11 +176,11 @@ public class BookController {
 			}
 			
 			bookService.updateBook(book);
-			return "true";
+			return "redirect:/book/getbook";
 		}catch (Exception ex) {
 			ex.printStackTrace();
 		}
-		return null;
+		return "redirect:/book/getbook";
 		
 	}
 }
