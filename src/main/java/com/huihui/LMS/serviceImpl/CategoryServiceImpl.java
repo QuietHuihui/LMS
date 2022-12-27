@@ -1,6 +1,7 @@
 package com.huihui.LMS.serviceImpl;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -44,6 +45,24 @@ public class CategoryServiceImpl implements CategoryService{
 			ex.printStackTrace();
 		}
 		
+	}
+
+	@Override
+	public void updateCat(String name,Integer id) {
+		categoryDao.updateCat(name,id);
+	}
+
+	@Override
+	public Category findById(Integer id) {
+		try {
+			Optional<Category> optional = categoryDao.findById(id);
+			if(optional.isPresent()) {
+				return optional.get();
+			}
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return null;
 	}
 
 }

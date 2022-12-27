@@ -1,5 +1,7 @@
 package com.huihui.LMS.controller;
 
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.huihui.LMS.dao.CategoryDao;
 import com.huihui.LMS.pojo.Category;
 import com.huihui.LMS.service.CategoryService;
 
@@ -18,6 +21,9 @@ public class CategoryController {
 	
 	@Autowired
 	CategoryService categoryService;
+	
+	@Autowired
+	CategoryDao categoryDao;
 	
 	@PostMapping("/addcat")
 	public String addcat(Category category) {
@@ -46,5 +52,19 @@ public class CategoryController {
 			return "false";
 		}
 		return "true";
+	}
+	
+	//打开更新页面，并不进行更新
+	@RequestMapping("/edit/{id}")
+	public String editCat(@PathVariable("id")Integer id,Model model) {
+		Category cat = categoryService.findById(id);
+		model.addAttribute("cat",cat);
+		return "updatecat";
+	}
+	
+	@RequestMapping("update")
+	public String updateCat(String name,Integer id) {
+		categoryService.updateCat(name,id);
+		return "redirect:/category/getcat";
 	}
 }

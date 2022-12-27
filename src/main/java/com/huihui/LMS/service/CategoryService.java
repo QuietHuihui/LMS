@@ -12,4 +12,8 @@ public interface CategoryService {
 
 	void deleteByID(Integer id);
 
+	void updateCat(String name,Integer id);
+
+	Category findById(Integer id);
+
 }

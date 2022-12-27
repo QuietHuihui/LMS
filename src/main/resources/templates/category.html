@@ -9,7 +9,6 @@
    <title>图书管理系统</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
     <script th:src="@{/js/jquery.js}"></script>
-    <!-- <script th:src="@{/js/jquery.slim.min.js}"></script> -->
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
     
 </head>
@@ -53,7 +52,9 @@
                 <tr th:each="categories,stats:${categories}">
                     <td th:text="${stats.count}">Trident</td>
                     <td th:text="${categories.name}">Internet</td>
-                    <td><a href="#" class="btn btn-sm btn-primary">编辑</a></td>
+                    <td><a th:href="@{./edit/}+${categories.id}" class="btn btn-sm btn-primary" 
+                    >编辑</a></td>
+
                     <td><button class="btn btn-sm btn-danger"
                     th:id="${categories.id}" th:onclick="deleteCategory(this.getAttribute('id'))">删除</button></td>
                     <script>
@@ -67,6 +68,8 @@
                             if(req=="true"){
                               alert("删除成功")
                               $("#"+id).parent().remove()
+                            }else{
+                              alert("删除失败")
                             }
                           },
                           //成功删除后刷新页面
