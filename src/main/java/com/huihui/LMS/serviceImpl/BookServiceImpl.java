@@ -83,6 +83,18 @@ public class BookServiceImpl implements BookService{
 		
 	}
 
+	@Override
+	public Book getBookById(Integer id) {
+		try {
+			@SuppressWarnings("deprecation")
+			Book book = bookDao.getById(id);
+			return book;
+		}catch (Exception ex) {
+			ex.printStackTrace();
+		}
+		return null;
+	}
+
 	
 
 

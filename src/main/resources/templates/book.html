@@ -146,7 +146,7 @@
                                             </td>
                                             <td>
                                                 <div class="r-no text-center">
-                                                    <a class="btn btn-primary btn-sm" href="#">借阅</a>
+                                                    <a th:href="@{/borrow/addborrow/}+${book.id}" class="btn btn-primary btn-sm">借阅</a>
                                                     <a th:href="@{./edit/}+${book.id}" class="btn btn-sm btn-primary" 
                                                         >编辑</a>
                                                     <button th:id="${book.id}" class="btn btn-danger btn-sm" th:onclick="deleteBook(this.getAttribute('id'))">删除</button>

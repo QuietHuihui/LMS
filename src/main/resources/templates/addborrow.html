@@ -22,29 +22,71 @@
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script> -->
     
 </head>
-<body style="background-color: ivory;">
-    <section class="container">
-      <h3 class="pt-4 pb-2">Bootstrap Datepicker</h3>
-      <form>
-        <div class="row form-group">
-          <label form="date" class="col-sm-1 col-form-label">Date</label>
-          <div class="col-sm-4">
-            <div class="input-group date" id="datepicker">
-              <input type="text" class="form-control"/>
-              <span class="input-group-append">
-                <span class="input-group-text bg-white">
-                  <i class="fa fa-calendar"></i>
+<body style="background-color:white;">
+  <div class="container">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <h2 class="text-center bg-primary p-2">借阅书籍</h2>
+        <div>
+          <div class="row">
+            <!-- 书本封面 -->
+            <div class="col-md-6" id="b_image">
+              <img th:src="@{/}+${book.cover}" alt="封面" width="300" height="400" />
+            </div>
+            <!-- 书本信息 -->
+            <div class="col-md-6">
+                <h3>[[${book.title}]]</h3>
+                <hr>
+                <p>作者:[[${book.author}]]</p>
+                <p>出版社:[[${book.press}]]</p>
+                <p>类别:[[${book.category.name}]]</p>
+                <p>ISBN:[[${book.isbn}]]</p>
+                <p>剩余数量:[[${book.amount}]]</p>
+                <hr>
+                <hr> 
+            </div>           
+        </div>
+        <!--书本信息结束-->
+        <form th:action="@{/borrow/addborrow}" method="POST">
+          <div class="row form-group mt-5">
+            <label form="date" class="col-sm-3 col-form-label">借阅日期</label>
+            <div class="col-sm-4">
+              <div class="input-group date" id="datepicker">
+                <input type="text" class="form-control" name="borrowedFrom" required/>
+                <span class="input-group-append">
+                  <span class="input-group-text bg-white">
+                    <i class="fa fa-calendar"></i>
+                  </span>
                 </span>
-              </span>
+              </div>
             </div>
           </div>
-        </div>
-      </form>
-    </section>
-    <script type="text/javascript">
-      $(function(){
-        $('#datepicker').datepicker()
-      })
-    </script>
+
+          <div class="row form-group mt-5">
+            <label form="date" class="col-sm-3 col-form-label">预计还书日期</label>
+            <div class="col-sm-4">
+              <div class="input-group date" id="datepickerr">
+                <input type="text" class="form-control" name="borrowedTo" required/>
+                <span class="input-group-append">
+                  <span class="input-group-text bg-white">
+                    <i class="fa fa-calendar"></i>
+                  </span>
+                </span>
+              </div>
+            </div>
+          </div>
+            <button type="submit" class="btn btn-outline-info mt-4" >确认借阅</button>
+        </form>
+    </div>
+    <div class="col-md-2"></div>
+</div>
 </body>
 </html>
+<script type="text/javascript">
+  $(function(){
+    $('#datepicker').datepicker()
+  }),
+  $(function(){
+    $('#datepickerr').datepicker()
+  })
+</script>

@@ -21,4 +21,6 @@ public interface BookService {
 
 	void updateBook(Book book);
 
+	Book getBookById(Integer id);
+
 }
