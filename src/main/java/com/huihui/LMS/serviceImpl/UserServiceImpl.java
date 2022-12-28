@@ -47,4 +47,15 @@ public class UserServiceImpl implements UserService{
 		return user;
 	}
 
+	@Override
+	public User getUserById(Integer uid) {
+		try {
+			User user = userDao.getById(uid);
+			return user;
+		}catch(Exception ex) {
+			ex.printStackTrace();
+		}
+		return null;
+	}
+
 }

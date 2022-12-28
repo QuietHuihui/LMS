@@ -10,11 +10,17 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+
+@NamedQuery(name="Borrow.getAll",query = "select b from Borrow b")
 
 @Entity
 @DynamicUpdate
@@ -29,12 +35,18 @@ public class Borrow {
 	private Integer id;
 	
 	@Column(name="borrowedFrom")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
 	private Date borrowedFrom;
 	
 	@Column(name="borrowedTo")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
 	private Date borrowedTo;
 	
 	@Column(name="returnDay")
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
+	@JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
 	private Date returnDate;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
@@ -105,6 +117,11 @@ public class Borrow {
 	public void setBook(Book book) {
 		this.book = book;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Borrow [id=" + id + ", borrowedFrom=" + borrowedFrom + ", borrowedTo=" + borrowedTo + ", returnDate="
+				+ returnDate + ", user=" + user + ", book=" + book + "]";
+	}
 	
 }
