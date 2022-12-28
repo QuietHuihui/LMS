@@ -35,6 +35,7 @@ public class BorrowController {
 	@Autowired
 	BorrowService borrowService;
 	
+	//创建借阅记录
 	@RequestMapping("/createborrow/{id}")
 	public String createBorrow(@PathVariable Integer id,Model model) {
 		Book book = bookService.getBookById(id);
@@ -42,6 +43,7 @@ public class BorrowController {
 		return "createborrow";
 	}
 	
+	//把借阅记录添加到数据库中
 	@PostMapping("/addborrow")
 	@ResponseBody
 	public String addBorrow(String bookid,String userid,String borrowedFrom,String borrowedTo) {
@@ -66,10 +68,14 @@ public class BorrowController {
 			Borrow borrow = new Borrow();
 			Book book = bookService.getBookById(bid);
 			User user = userService.getUserById(uid);
+			//借阅时减去一本书
+			book.setAmount(book.getAmount()-1);
+			//设置各项属性
 			borrow.setBorrowedFrom(bf_sql);
 			borrow.setBorrowedTo(bt_sql);
 			borrow.setUser(user);
 			borrow.setBook(book);
+			//保存借阅记录
 			borrowService.save(borrow);
 			return "true";
 		}catch(Exception ex) {
