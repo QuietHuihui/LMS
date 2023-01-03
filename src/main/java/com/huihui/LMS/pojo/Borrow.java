@@ -22,6 +22,8 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 
 @NamedQuery(name="Borrow.getAll",query = "select b from Borrow b")
 
+//@NamedQuery(name="Borrow.getBorrow",query="select b from Borrow b where b.user_fk=:id")
+
 @Entity
 @DynamicUpdate
 @DynamicInsert

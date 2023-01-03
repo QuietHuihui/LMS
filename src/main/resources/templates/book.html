@@ -32,7 +32,7 @@
                                   <a class="nav-link" th:href="@{'http://localhost:9999/book/getbook'}">所有书籍</a>
                                 </li>
                                 <li class="nav-item">
-                                  <a class="nav-link" href="#">借阅信息</a>
+                                  <a class="nav-link" th:if="${session.user!=null}" th:href="@{/borrow/getborrow/}+${session.user.id}">借阅信息</a>
                                 </li>
                                 <li class="nav-item">
                                   <a class="nav-link" href="#">通知公告</a>

@@ -35,4 +35,9 @@ public class BorrowServiceImpl implements BorrowService{
 		return null;
 	}
 
+	@Override
+	public List<Borrow> getBorrow(Integer id) {
+		return borrowDao.getBorrow(id);	 
+	}
+
 }

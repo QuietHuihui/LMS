@@ -3,6 +3,7 @@ package com.huihui.LMS.controller;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -84,9 +85,19 @@ public class BorrowController {
 		return "false";			
 	}
 	
-	@GetMapping("/getborrow")
+	@GetMapping("/getAllBorrow")
 	@ResponseBody
-	public String getBorrow() {
+	public String getAllBorrow() {
 		return (borrowService.getAllBorrow()).toString();
+	}
+	
+	//获取一个用户的借书记录
+	@GetMapping("/getborrow/{id}")
+	public String getBorrow(@PathVariable Integer id,Model model) {
+		List<Borrow>borrows = borrowService.getBorrow(id);
+		model.addAttribute("borrows", borrows);
+		System.out.println(id);
+		System.out.println(borrows);
+		return "getborrow";
 	}
 }
