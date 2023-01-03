@@ -8,11 +8,13 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+
 
 @Entity
 @DynamicUpdate
@@ -126,6 +128,12 @@ public class Book {
 
 	public void setCategory(Category category) {
 		this.category = category;
+	}
+
+	@Override
+	public String toString() {
+		return "Book [id=" + id + ", isbn=" + isbn + ", title=" + title + ", press=" + press + ", cover=" + cover
+				+ ", author=" + author + ", amount=" + amount + ", category=" + category + "]";
 	}
 	
 	

@@ -1,5 +1,7 @@
 package com.huihui.LMS.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.ui.Model;
@@ -22,5 +24,7 @@ public interface BookService {
 	void updateBook(Book book);
 
 	Book getBookById(Integer id);
+
+	List<Book> findBySearch(String search);
 
 }

@@ -88,7 +88,19 @@
                     <div class="tab-content mt-5" id="myTabContent">
                         <div class="tab-pane fade active show" id="home" role="tabpanel">
                             <div class="mb-2">
-                                <a th:href="@{http://localhost:9999/book/addbook}" class="btn btn-nm btn-success">添加书籍</a>
+                                <table>
+                                    <td th:if="${session.user!=null && session.user.usertype == 'admin'}">
+                                        <a th:href="@{http://localhost:9999/book/addbook}" class="btn btn-nm btn-success">添加书籍</a>
+                                    </td>
+                                    <td>
+                                        <!--搜索框-->
+                                        <form th:action="@{/book/searchbook}" method="post" class="form-inline my-2 my-lg-0">
+                                            <input name="search" class="form-control mr-sm-2" type="search" placeholder="书名/作者/ISBN/出版社" aria-label="Search">
+                                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
+                                        </form>
+                                        <!--搜索框结束-->
+                                    </td>
+                                </table>
                             </div>
                             <div class="table-responsive">
                                 <table class="table">

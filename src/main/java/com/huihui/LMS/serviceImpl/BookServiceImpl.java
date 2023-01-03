@@ -93,6 +93,11 @@ public class BookServiceImpl implements BookService{
 		return null;
 	}
 
+	@Override
+	public List<Book> findBySearch(String search) {
+		return bookDao.findBySearch(search);
+	}
+
 	
 
 
