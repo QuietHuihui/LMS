@@ -38,7 +38,7 @@
                                   <a class="nav-link" href="#">通知公告</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" th:href="@{'http://localhost:9999/category/getcat'}">类别管理</a>
+                                    <a class="nav-link" th:if="${session.user!=null && session.user.usertype == 'admin'}" th:href="@{'http://localhost:9999/category/getcat'}">类别管理</a>
                                 </li>
                               </ul>
 
@@ -51,15 +51,14 @@
                                       <button class="dropdown-item" type="button" onclick="logout()">退出</button>
                                       <script>
                                           function logout(){
-                                              $.ajax({
-                                                  url:"/user/logout",
-                                                  dataType:"text",
-                                                  type:"GET",
-                                                  success:function(req){
-                                                    location.href = '[[@{/login}]]';
-                                                  }
-                                              });
-                                            
+                                            $.ajax({
+                                                url:"/user/logout",
+                                                dataType:"text",
+                                                type:"POST",
+                                                success:function(req){
+                                                    if(req=="true")location.href='[[@{/login}]]'
+                                                }
+                                            });
                                           }
                                       </script>
                                     </div>
