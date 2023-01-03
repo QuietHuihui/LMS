@@ -160,9 +160,9 @@
                                                 <div class="r-no text-center">
                                                     <a th:if="${book.amount!=0}" th:href="@{/borrow/createborrow/}+${book.id}" class="btn btn-primary btn-sm">借阅</a>
                                                     <span th:if="${book.amount==0}">已借完</span>
-                                                    <a th:href="@{./edit/}+${book.id}" class="btn btn-sm btn-primary" 
+                                                    <a th:if="${session.user!=null && session.user.usertype == 'admin'}" th:href="@{./edit/}+${book.id}" class="btn btn-sm btn-primary" 
                                                         >编辑</a>
-                                                    <button th:id="${book.id}" class="btn btn-danger btn-sm" th:onclick="deleteBook(this.getAttribute('id'))">删除</button>
+                                                    <button th:if="${session.user!=null && session.user.usertype == 'admin'}" th:id="${book.id}" class="btn btn-danger btn-sm" th:onclick="deleteBook(this.getAttribute('id'))">删除</button>
                                                     <script>
                                                 	function deleteBook(id){
                                                 		$.ajax({
