@@ -186,13 +186,11 @@ public class BookController {
 	}
 	
 	@RequestMapping("/searchbook")
-	@ResponseBody
 	public String searchBook(@RequestParam(name = "search")String search,Model model) {
 		List<Book> books = bookService.findBySearch(search);
 		model.addAttribute("books",books);
-			//return "result";
 		System.out.println(search);
 		System.out.println(books);
-		return "true";
+		return "result";
 	}
 }

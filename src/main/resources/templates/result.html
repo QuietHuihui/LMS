@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+        <!-- 必须的 meta 标签 -->
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+   <title>图书管理系统</title>
+   <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+   <script th:src="@{/js/jquery.js}"></script>
+   <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+    
+</head>
+
+<body>
+    <div class="event-schedule-area-two bg-color pad100">
+        <div class="container">
+            <!-- row end-->
+            <div class="row">
+                <div class="col-lg-12">
+                    <!--导航栏-->
+                    <div class="container mt-5">
+                        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                            <a class="navbar-brand navbar-disabled">图书管理系统</a>
+                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                              <span class="navbar-toggler-icon"></span>
+                            </button>
+                            <div class="collapse navbar-collapse" id="navbarText">
+                              <ul class="navbar-nav mr-auto">
+                                <li class="nav-item">
+                                  <a class="nav-link" th:href="@{'http://localhost:9999/book/getbook'}">所有书籍</a>
+                                </li>
+                                <li class="nav-item">
+                                  <a class="nav-link" th:if="${session.user!=null}" th:href="@{/borrow/getborrow/}+${session.user.id}">借阅信息</a>
+                                </li>
+                                <li class="nav-item">
+                                  <a class="nav-link" href="#">通知公告</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" th:href="@{'http://localhost:9999/category/getcat'}">类别管理</a>
+                                </li>
+                              </ul>
+
+                                <div class="dropdown">
+                                    <button class="btn btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"
+                                    >[[${session.user!=null?session.user.username:'游客'}]]
+                                    </button>
+                                    <div th:if="${session.user!=null}" class="dropdown-menu">
+                                      <button class="dropdown-item" type="button">个人信息</button>
+                                      <button class="dropdown-item" type="button" onclick="logout()">退出</button>
+                                      <script>
+                                          function logout(){
+                                              $.ajax({
+                                                  url:"/user/logout",
+                                                  dataType:"text",
+                                                  type:"GET",
+                                                  success:function(req){
+                                                    location.href = '[[@{/login}]]';
+                                                  }
+                                              });
+                                            
+                                          }
+                                      </script>
+                                    </div>
+
+                                    <div th:if="${session.user==null}" class="dropdown-menu">
+                                        <button class="dropdown-item" type="button" onclick="login()">登录</button>
+                                        <script>
+                                            function login(){
+                                                location.href = '[[@{/login}]]';
+                                            }
+                                        </script>
+                                        <button class="dropdown-item" type="button">注册</button>
+                                        <script>
+                                            function register(){
+                                                location.href = '[[@{/register}]]';
+                                            }
+                                        </script>
+                                    </div>
+
+                                  </div>
+
+                            </div>
+                          </nav>
+                    </div>
+                    <!--导航栏结束-->
+                    <div class="tab-content mt-5" id="myTabContent">
+                        <div class="tab-pane fade active show" id="home" role="tabpanel">
+                            <div class="mb-2">
+                                <table>
+                                    <td th:if="${session.user!=null && session.user.usertype == 'admin'}">
+                                        <a th:href="@{http://localhost:9999/book/addbook}" class="btn btn-nm btn-success">添加书籍</a>
+                                    </td>
+                                    <td>
+                                        <!--搜索框-->
+                                        <form th:action="@{/book/searchbook}" method="post" class="form-inline my-2 my-lg-0">
+                                            <input name="search" class="form-control mr-sm-2" type="search" placeholder="书名/作者/ISBN/出版社" aria-label="Search">
+                                            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">搜索</button>
+                                        </form>
+                                        <!--搜索框结束-->
+                                    </td>
+                                </table>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">序号</th>
+                                            <th scope="col">封面</th>
+                                            <th scope="col">书名</th>
+                                            <th scope="col">作者</th>
+                                            <th scope="col">类别</th>
+                                            <th scope="col">数量</th>
+                                            <th class="text-center" scope="col">操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr class="inner-box" th:each="book,stats:${books}">
+                                            <!--序号-->
+                                            <td scope="row">
+                                                <div class="event-date">
+                                                    <span th:text="${stats.count}"></span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="event-img">
+                                                    <img th:src="@{/}+${book.cover}" alt="封面" width="150px" height="200px" />
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="event-wrap">
+                                                    <h3 th:text="${book.title}"></h3>
+                                                    <div class="meta">
+                                                        <div class="organizers">
+                                                            <span th:text="${book.press}"></span>
+                                                        </div>
+                                                        <div class="categories">
+                                                            ISBN <span th:text="${book.isbn}"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="r-no">
+                                                    <span th:text="${book.author}"></span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="r-no">
+                                                    <span th:text="${book.category.name}"></span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="r-no">
+                                                    <span th:text="${book.amount}"></span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <div class="r-no text-center">
+                                                    <a th:if="${book.amount!=0}" th:href="@{/borrow/createborrow/}+${book.id}" class="btn btn-primary btn-sm">借阅</a>
+                                                    <span th:if="${book.amount==0}">已借完</span>
+                                                    <a th:href="@{./edit/}+${book.id}" class="btn btn-sm btn-primary" 
+                                                        >编辑</a>
+                                                    <button th:id="${book.id}" class="btn btn-danger btn-sm" th:onclick="deleteBook(this.getAttribute('id'))">删除</button>
+                                                    <script>
+                                                	function deleteBook(id){
+                                                		$.ajax({
+                                                      url:"./delete/"+id,
+                                                      dataType:"text",
+                                                      type:"GET",
+                                                      success:function(req){
+                                                        //获取返回信息
+                                                        if(req=="true"){
+                                                          alert("删除成功"),
+                                                          $("#"+id).parent().remove()
+                                                        }
+                                                      },
+                                                      //成功删除后刷新页面
+                                                		success:function(){
+                                                			location.href='[[@{/book/getbook}]]'
+                                                		}
+                                                    });
+                                                	}
+                                                    </script>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <!-- /col end-->
+            </div>
+            <!-- /row end-->
+        </div>
+    </div>
+</body>
+    
+</html>
+
