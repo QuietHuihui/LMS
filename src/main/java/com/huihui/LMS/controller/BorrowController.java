@@ -2,6 +2,7 @@ package com.huihui.LMS.controller;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -11,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.thymeleaf.util.DateUtils;
@@ -99,5 +101,35 @@ public class BorrowController {
 		System.out.println(id);
 		System.out.println(borrows);
 		return "getborrow";
+	}
+	
+	//还书
+	@GetMapping("/returnbook/{id}")
+	@ResponseBody
+	//id是借阅记录的id
+	public String returnBook(@PathVariable Integer id) {
+		try {
+			//获取此条借阅记录
+			Borrow borrow = borrowService.getBorrowById(id);
+			
+			//获取还书时间
+		    Calendar calendar= Calendar.getInstance();
+		    SimpleDateFormat dateFormat= new SimpleDateFormat("yyyy-MM-dd");
+		    java.sql.Date returnDate = java.sql.Date.valueOf(dateFormat.format(calendar.getTime()));
+		    
+		    //设置此条记录的还书时间
+		    borrow.setReturnDate(returnDate);
+		    borrowService.save(borrow);
+		    
+		    //设置还了的书的书本数量加一
+		    Book book = bookService.getBookById(borrow.getBook().getId());
+		    book.setAmount(book.getAmount()+1);
+		    bookService.save(book);
+		    
+		    return "true";
+		}catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	    return "false";
 	}
 }

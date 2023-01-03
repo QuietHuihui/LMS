@@ -16,13 +16,14 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 @NamedQuery(name="Borrow.getAll",query = "select b from Borrow b")
 
-//@NamedQuery(name="Borrow.getBorrow",query="select b from Borrow b where b.user_fk=:id")
+@NamedQuery(name="Borrow.getBorrow",query="select b from Borrow b where b.user.id=:id ")
 
 @Entity
 @DynamicUpdate

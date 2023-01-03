@@ -76,8 +76,6 @@ public class BookServiceImpl implements BookService{
 
 	@Override
 	public void updateBook(Book book) {
-		System.out.println("inserviceimpl"+book.getTitle());
-		System.out.println("thisistheid"+book.getId());
 		bookDao.updateBook(book.getId(),book.getIsbn(),book.getTitle(),book.getPress(),
 				book.getCover(),book.getAuthor(),book.getAmount(),book.getCategory());
 		

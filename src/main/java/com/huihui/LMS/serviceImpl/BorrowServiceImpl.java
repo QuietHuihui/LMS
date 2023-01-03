@@ -40,4 +40,10 @@ public class BorrowServiceImpl implements BorrowService{
 		return borrowDao.getBorrow(id);	 
 	}
 
+	@SuppressWarnings("deprecation")
+	@Override
+	public Borrow getBorrowById(Integer id) {
+		return borrowDao.getById(id);
+	}
+
 }

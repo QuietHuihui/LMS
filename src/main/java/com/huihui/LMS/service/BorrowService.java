@@ -12,4 +12,6 @@ public interface BorrowService {
 
 	List<Borrow> getBorrow(Integer id);
 
+	Borrow getBorrowById(Integer id);
+
 }

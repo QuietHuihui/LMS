@@ -12,7 +12,7 @@ public interface BorrowDao extends JpaRepository<Borrow, Integer>{
 
 	List<Borrow> getAll();
 
-	@Query("select b from Borrow b where b.user.id=id ")
-	List<Borrow> getBorrow(Integer id);
+	
+	List<Borrow> getBorrow(@Param("id") Integer id);
 
 }
