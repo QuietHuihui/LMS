@@ -42,7 +42,7 @@ public class BookServiceImpl implements BookService{
 	@Override
 	public void getBook(HttpServletRequest request, Model model) {
 		Integer index = 1;
-		Integer step = 3;
+		Integer step = 6;
 		String strIndex = request.getParameter("index");
 		if(StringUtils.hasText(strIndex)) {
 			index = Integer.valueOf(strIndex);
@@ -51,21 +51,24 @@ public class BookServiceImpl implements BookService{
 		String strStep = request.getParameter("step");
 		if(StringUtils.hasText(strStep)) {
 			step = Integer.valueOf(strStep);
-			if(step<3)step=3;
+			if(step<6)step=6;
 		}
-		System.out.println("test");
-		System.out.println(index);
-		System.out.println(step);
-		//Sort sort = Sort.by(Sort.DEFAULT_DIRECTION,"id");
+
+
 		PageRequest pageRequest = PageRequest.of(index-1,step,Sort.by("id"));
 		
+		//获取数据库中书本记录的总条数
 		Page<Book>books = bookDao.findAll(pageRequest);
 		List<Book>temp = bookDao.findAll();
 		Integer allCount = temp.size();
+		
+		//从数据库中获取指定页面中的数据记录
 		Integer start = step*(index-1);
 		List<Book>bucher = bookDao.findByPage(start,step);
-		System.out.println(books.getContent());
+		
+		//用来找页数用的
 		model.addAttribute("books",books);
+		//展示在前端的书本信息
 		model.addAttribute("bucher",bucher);
 	}
 

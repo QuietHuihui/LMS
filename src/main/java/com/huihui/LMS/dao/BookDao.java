@@ -24,7 +24,7 @@ public interface BookDao extends JpaRepository<Book, Integer>{
 	//根据书名、作者或者ISBN或者出版社查询图书
 	@Query("select b from Book b where b.title like CONCAT('%',:search,'%') or b.author like CONCAT('%',:search,'%') or b.isbn like CONCAT('%',:search,'%') or b.press like CONCAT('%',:search,'%')")
 	List<Book> findBySearch(String search);
-	
+	//分页查询，start是起始索引，step是步长
 	@Query(value="select* from Book limit :start,:step",nativeQuery = true)
 	List<Book> findByPage(@Param("start")Integer start,@Param("step") Integer step);
 
