@@ -187,9 +187,11 @@ public class BookController {
 	}
 	
 	@RequestMapping("/searchbook")
-	public String searchBook(@RequestParam(name = "search")String search,HttpServletRequest request,Model model) {
-		List<Book> books = bookService.findBySearch(search,request,model);
+	public String searchBook(@RequestParam(name = "search")String search,Model model) {
+		List<Book> books = bookService.findBySearch(search);
 		model.addAttribute("books",books);
+		System.out.println(search);
+		System.out.println(books);
 		return "result";
 	}
 }

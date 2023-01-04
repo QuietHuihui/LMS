@@ -127,7 +127,7 @@ public class BookServiceImpl implements BookService{
 	}
 
 	@Override
-	public List<Book> findBySearch(String search, HttpServletRequest request, Model model) {
+	public List<Book> findBySearch(String search) {
 		return bookDao.findBySearch(search);
 	}
 

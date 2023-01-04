@@ -20,68 +20,7 @@
             <div class="row">
                 <div class="col-lg-12">
                     <!--导航栏-->
-                    <div class="container mt-5">
-                        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                            <a class="navbar-brand navbar-disabled">图书管理系统</a>
-                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                              <span class="navbar-toggler-icon"></span>
-                            </button>
-                            <div class="collapse navbar-collapse" id="navbarText">
-                              <ul class="navbar-nav mr-auto">
-                                <li class="nav-item">
-                                  <a class="nav-link" th:href="@{'http://localhost:9999/book/getbook'}">所有书籍</a>
-                                </li>
-                                <li class="nav-item">
-                                  <a class="nav-link" th:if="${session.user!=null}" th:href="@{/borrow/getborrow/}+${session.user.id}">借阅信息</a>
-                                </li>
-                                <li class="nav-item">
-                                  <a class="nav-link" href="#">通知公告</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link" th:if="${session.user!=null && session.user.usertype == 'admin'}" th:href="@{'http://localhost:9999/category/getcat'}">类别管理</a>
-                                </li>
-                              </ul>
-
-                                <div class="dropdown">
-                                    <button class="btn btn-lg dropdown-toggle" type="button" data-toggle="dropdown" aria-expanded="false"
-                                    >[[${session.user!=null?session.user.username:'游客'}]]
-                                    </button>
-                                    <div th:if="${session.user!=null}" class="dropdown-menu">
-                                      <button class="dropdown-item" type="button">个人信息</button>
-                                      <button class="dropdown-item" type="button" onclick="logout()">退出</button>
-                                      <script>
-                                          function logout(){
-                                            $.ajax({
-                                                url:"/user/logout",
-                                                dataType:"text",
-                                                type:"POST",
-                                                success:function(req){
-                                                    if(req=="true")location.href='[[@{/login}]]'
-                                                }
-                                            });
-                                          }
-                                      </script>
-                                    </div>
-
-                                    <div th:if="${session.user==null}" class="dropdown-menu">
-                                        <button class="dropdown-item" type="button" onclick="login()">登录</button>
-                                        <script>
-                                            function login(){
-                                                location.href = '[[@{/login}]]';
-                                            }
-                                        </script>
-                                        <button class="dropdown-item" type="button">注册</button>
-                                        <script>
-                                            function register(){
-                                                location.href = '[[@{/register}]]';
-                                            }
-                                        </script>
-                                    </div>
-
-                                  </div>
-
-                            </div>
-                          </nav>
+                    <div class="container mt-5" th:include="navbar">
                     </div>
                     <!--导航栏结束-->
                     <div class="tab-content mt-5" id="myTabContent">
