@@ -1,5 +1,6 @@
 package com.huihui.LMS.serviceImpl;
 
+import java.awt.print.Pageable;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -7,12 +8,17 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.huihui.LMS.dao.BookDao;
@@ -34,8 +40,23 @@ public class BookServiceImpl implements BookService{
 	}
 
 	@Override
-	public void getBook(Model model) {
-		 List<Book> books = bookDao.findAll();
+	public void getBook(HttpServletRequest request, Model model) {
+		Integer index = 1;
+		Integer step = 3;
+		String strIndex = request.getParameter("index");
+		if(StringUtils.hasText(strIndex)) {
+			index = Integer.valueOf(strIndex);
+			if(index<1)index=1;
+		}
+		String strStep = request.getParameter("step");
+		if(StringUtils.hasText(strStep)) {
+			step = Integer.valueOf(strStep);
+			if(step<3)step=3;
+		}
+		
+		Sort sort = Sort.by(Sort.Direction.ASC,"id");
+		PageRequest pageRequest = PageRequest.of(index-1,step,sort);
+		Page<Book>books = bookDao.findAll(pageRequest);
 		 model.addAttribute("books",books);
 	}
 

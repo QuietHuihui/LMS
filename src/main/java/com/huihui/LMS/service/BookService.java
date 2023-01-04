@@ -2,6 +2,7 @@ package com.huihui.LMS.service;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.ui.Model;
@@ -15,7 +16,7 @@ public interface BookService {
 
 	void save(Book book);
 
-	void getBook(Model model);
+	void getBook(HttpServletRequest request, Model model);
 
 	void deleteByID(Integer id);
 

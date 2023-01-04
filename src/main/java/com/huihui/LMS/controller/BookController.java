@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.swing.text.html.Option;
 
@@ -98,8 +99,8 @@ public class BookController {
 	}
 	
 	@GetMapping("/getbook")
-	public String getBook(Model model) {
-		bookService.getBook(model);
+	public String getBook(HttpServletRequest request ,Model model) {
+		bookService.getBook(request,model);
 		return "book";
 	}
 	

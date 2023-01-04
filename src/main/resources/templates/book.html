@@ -194,7 +194,54 @@
                                         
                                     </tbody>
                                 </table>
+
                             </div>
+
+                            <!--换页-->
+                            <div>
+                                <nav aria-label="Page navigation example" th:if="${books.getTotalPages() gt 1}">
+                                    <ul class="pagination justify-content-end">
+                    
+                                       <li th:if="${books.hasPrevious()}" class="page-item">
+                                           <a th:href="@{/book/getbook?index=1}" href="/book/getbook?index=1" class="page-link">&lt;&lt;</a>
+                                           <!-- <a th:href="@{/book/getbook?index=1}" href="/book/getbook?index=1" class="page-link">&lt;&lt;</a> -->
+                                        </li>
+                                        <li th:if="${books.hasPrevious()}" class="page-item">
+                                            <a th:href="@{/book/getbook?index={v}&step={s}(v=${books.getNumber()},s=${books.getSize()})}" href="/book/getbook?index=&step=" class="page-link">&lt;</a>
+                                        </li>
+                    
+                                       <li th:unless="${books.hasPrevious()}" class="page-item disabled"><a href="#" class="page-link">&lt;&lt;</a></li>
+                                        <li th:unless="${books.hasPrevious()}" class="page-item disabled"><a href="#" class="page-link">&lt;</a></li>
+                    
+                                       <li th:if="${books.getTotalPages() le 7}" th:each="i:${#numbers.sequence(1, books.getTotalPages())} " th:class="${i eq books.getNumber()+1}?'page-item active':'page-item'">
+                                            <a th:href="@{/book/getbook?index={v}&step={s}(v=${i}, s=${books.getSize()})}" href="/book/getbook?index=&step=" th:text="${i}" class="page-link"></a>
+                                        </li>
+                    
+                                        <li th:if="${books.getTotalPages() gt 7}" th:each="i:${#numbers.sequence(1, 3)}" th:class="${i eq books.getNumber()+1}?'page-item active':'page-item'">
+                                            <a th:href="@{/book/getbook?index={v}&step={s}(v=${i}, s=${books.getSize()})}" href="/book/getbook?index=&step=" th:text="${i}" class="page-link"></a>
+                                        </li>
+                                        <li th:if="${books.getTotalPages() gt 7}" th:class="'page-item disabled'">
+                                            <a href="#" class="page-link">...</a>
+                                        </li>
+                                        <li th:if="${books.getTotalPages() gt 7}" th:each="i:${#numbers.sequence(books.getTotalPages()-2, books.getTotalPages())}" th:class="${i eq books.getNumber()+1}?'page-item active':'page-item'">
+                                            <a th:href="@{/book/getbook?index={v}&step={s}(v=${i}, s=${books.getSize()})}" href="/book/getbook?index=&step=" th:text="${i}" class="page-link"></a>
+                                        </li>
+                    
+                                        <li th:if="${books.hasNext()}" class="page-item">
+                                            <a th:href="@{/book/getbook?index={v}&step={s}(v=${books.getNumber()+2},s=${books.getSize()})}" href="/book/getbook?index=&step=" class="page-link">&gt;</a>
+                                        </li>
+                                        <li th:if="${books.hasNext()}" class="page-item">
+                                            <a th:href="@{/book/getbook?index={v}(v=${books.getTotalPages()})}" href="/book/getbook?index=" class="page-link">&gt;&gt;</a>
+                                        </li>
+                    
+                                        <li th:unless="${books.hasNext()}" class="page-item disabled"><a href="#" class="page-link">&gt;</a></li>
+                                        <li th:unless="${books.hasNext()}" class="page-item disabled"><a href="#" class="page-link">&gt;&gt;</a></li>
+                    
+                                    </ul>
+                                </nav>
+                            </div>
+                            <!--换页结束-->
+
                         </div>
 
 
