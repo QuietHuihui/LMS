@@ -101,7 +101,34 @@
                                                     <span th:if="${book.amount==0}">已借完</span>
                                                     <a th:if="${session.user!=null && session.user.usertype == 'admin'}" th:href="@{./edit/}+${book.id}" class="btn btn-sm btn-primary" 
                                                         >编辑</a>
-                                                    <button th:if="${session.user!=null && session.user.usertype == 'admin'}" th:id="${book.id}" class="btn btn-danger btn-sm" th:onclick="deleteBook(this.getAttribute('id'))">删除</button>
+
+
+                                                         <!-- Button trigger modal -->
+                                                    <button th:if="${session.user!=null && session.user.usertype == 'admin'}" type="button" class="btn btn-danger btn-sm" data-toggle="modal" th:data-target="'#exampleModal-'+${book.id}">
+                                                        删除
+                                                    </button>
+                                                    
+                                                    <!-- Modal -->
+                                                    <div class="modal fade" th:id="'exampleModal-'+${book.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                            <h5 class="modal-title" id="exampleModalLabel">删除</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                确认要删除书本“[[${book.title}]]”吗？
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                            <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+                                                            <button type="button" class="btn btn-danger" th:id="${book.id}" th:onclick="deleteBook(this.getAttribute('id'))">确认删除</button>
+                                                            </div>
+                                                        </div>
+                                                        </div>
+                                                    </div>
+                                                    <!-- 模态框结束 -->
                                                     <script>
                                                 	function deleteBook(id){
                                                 		$.ajax({
@@ -112,13 +139,10 @@
                                                         //获取返回信息
                                                         if(req=="true"){
                                                           alert("删除成功"),
-                                                          $("#"+id).parent().remove()
+                                                          $("#"+id).parent().remove(),
+                                                          location.href='[[@{/book/getbook}]]'
                                                         }
                                                       },
-                                                      //成功删除后刷新页面
-                                                		success:function(){
-                                                			location.href='[[@{/book/getbook}]]'
-                                                		}
                                                     });
                                                 	}
                                                     </script>

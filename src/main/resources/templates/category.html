@@ -30,8 +30,9 @@
                     <td><a th:href="@{./edit/}+${categories.id}" class="btn btn-sm btn-primary" 
                     >编辑</a></td>
 
-                    <td><button class="btn btn-sm btn-danger"
-                    th:id="${categories.id}" th:onclick="deleteCategory(this.getAttribute('id'))">删除</button></td>
+                    <td>
+                      <!-- <button class="btn btn-sm btn-danger"
+                    th:id="${categories.id}" th:onclick="deleteCategory(this.getAttribute('id'))">删除</button>
                     <script>
                     	function deleteCategory(id){
                     		$.ajax({
@@ -51,7 +52,54 @@
                     		}
                         });
                     	}
+                    </script> -->
+
+
+                      <!-- Button trigger modal -->
+                      <button th:if="${session.user!=null && session.user.usertype == 'admin'}" type="button" class="btn btn-danger btn-sm" data-toggle="modal" th:data-target="'#exampleModal-'+${categories.id}">
+                        删除
+                    </button>
+                    
+                    <!-- Modal -->
+                    <div class="modal fade" th:id="'exampleModal-'+${categories.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">删除</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                            </div>
+                            <div class="modal-body">
+                                确认要删除类别“[[${categories.name}]]”吗？
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
+                            <button type="button" class="btn btn-danger" th:id="${categories.id}" th:onclick="deleteCategory(this.getAttribute('id'))">确认删除</button>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                    <!-- 模态框结束 -->
+                  </td>
+                    <script>
+                  function deleteCategory(id){
+                    $.ajax({
+                      url:"./delete/"+id,
+                      dataType:"text",
+                      type:"GET",
+                      success:function(req){
+                        //获取返回信息
+                        if(req=="true"){
+                          alert("删除成功"),
+                          $("#"+id).parent().remove(),
+                          location.href='[[@{/category/getcat}]]'
+                        }
+                      },
+                    });
+                  }
                     </script>
+
                   </td>
                 </tr>   
             </tbody>
