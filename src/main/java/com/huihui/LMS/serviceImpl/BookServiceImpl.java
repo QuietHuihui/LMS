@@ -53,11 +53,20 @@ public class BookServiceImpl implements BookService{
 			step = Integer.valueOf(strStep);
 			if(step<3)step=3;
 		}
+		System.out.println("test");
+		System.out.println(index);
+		System.out.println(step);
+		//Sort sort = Sort.by(Sort.DEFAULT_DIRECTION,"id");
+		PageRequest pageRequest = PageRequest.of(index-1,step,Sort.by("id"));
 		
-		Sort sort = Sort.by(Sort.Direction.ASC,"id");
-		PageRequest pageRequest = PageRequest.of(index-1,step,sort);
 		Page<Book>books = bookDao.findAll(pageRequest);
-		 model.addAttribute("books",books);
+		List<Book>temp = bookDao.findAll();
+		Integer allCount = temp.size();
+		Integer start = step*(index-1);
+		List<Book>bucher = bookDao.findByPage(start,step);
+		System.out.println(books.getContent());
+		model.addAttribute("books",books);
+		model.addAttribute("bucher",bucher);
 	}
 
 	@Override
