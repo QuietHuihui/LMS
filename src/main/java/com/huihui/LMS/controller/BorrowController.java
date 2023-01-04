@@ -6,6 +6,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,8 +50,7 @@ public class BorrowController {
 	
 	//把借阅记录添加到数据库中
 	@PostMapping("/addborrow")
-	@ResponseBody
-	public String addBorrow(String bookid,String userid,String borrowedFrom,String borrowedTo) {
+	public String addBorrow(String bookid,String userid,String borrowedFrom,String borrowedTo,HttpSession session) {
 		try {
 			System.out.println("Borrow from and to");
 			System.out.println(borrowedFrom);
@@ -80,11 +81,11 @@ public class BorrowController {
 			borrow.setBook(book);
 			//保存借阅记录
 			borrowService.save(borrow);
-			return "true";
+			return "redirect:/book/getbook";
 		}catch(Exception ex) {
 			ex.printStackTrace();
 		}
-		return "false";			
+		return "redirect:/book/getbook";		
 	}
 	
 	@GetMapping("/getAllBorrow")

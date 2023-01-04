@@ -157,7 +157,13 @@
                                             </td>
                                             <td>
                                                 <div class="r-no text-center">
-                                                    <a th:if="${book.amount!=0}" th:href="@{/borrow/createborrow/}+${book.id}" class="btn btn-primary btn-sm">借阅</a>
+                                                    <a th:if="${session.user!=null && book.amount!=0}" th:href="@{/borrow/createborrow/}+${book.id}" class="btn btn-primary btn-sm" onclick="getbook()">借阅</a>
+                                                    <span th:if="${session.user==null}">登录后借阅</span>
+                                                    <script>
+                                                        function getbook(){
+                                                            location.href='[[@{/book/getbook}]]';
+                                                        }
+                                                    </script>
                                                     <span th:if="${book.amount==0}">已借完</span>
                                                     <a th:if="${session.user!=null && session.user.usertype == 'admin'}" th:href="@{./edit/}+${book.id}" class="btn btn-sm btn-primary" 
                                                         >编辑</a>
