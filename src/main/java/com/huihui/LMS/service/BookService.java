@@ -26,6 +26,6 @@ public interface BookService {
 
 	Book getBookById(Integer id);
 
-	List<Book> findBySearch(String search);
+	List<Book> findBySearch(String search, HttpServletRequest request, Model model);
 
 }
