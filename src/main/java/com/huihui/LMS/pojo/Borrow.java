@@ -47,6 +47,7 @@ public class Borrow {
 	@JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")
 	private Date borrowedTo;
 	
+	//注意：这里注解名称和变量名称不一样
 	@Column(name="returnDay")
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	@JsonFormat(pattern="yyyy-MM-dd",timezone = "GMT+8")

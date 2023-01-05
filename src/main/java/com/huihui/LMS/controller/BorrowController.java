@@ -88,20 +88,20 @@ public class BorrowController {
 		return "redirect:/book/getbook";		
 	}
 	
-	@GetMapping("/getAllBorrow")
-	@ResponseBody
-	public String getAllBorrow() {
-		return (borrowService.getAllBorrow()).toString();
-	}
-	
 	//获取一个用户的借书记录
 	@GetMapping("/getborrow/{id}")
 	public String getBorrow(@PathVariable Integer id,Model model) {
 		List<Borrow>borrows = borrowService.getBorrow(id);
 		model.addAttribute("borrows", borrows);
-		System.out.println(id);
-		System.out.println(borrows);
 		return "getborrow";
+	}
+	
+	//获取所有用户的借书记录
+	@GetMapping("/getallborrow")
+	public String getAllBorrow(Model model) {
+		List<Borrow>borrows = borrowService.getAllBorrow();
+		model.addAttribute("borrows",borrows);
+		return "getallborrow";
 	}
 	
 	//还书
