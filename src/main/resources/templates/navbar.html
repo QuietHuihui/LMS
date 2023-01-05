@@ -24,7 +24,6 @@
             >[[${session.user!=null?session.user.username:'游客'}]]
             </button>
             <div th:if="${session.user!=null}" class="dropdown-menu">
-              <button class="dropdown-item" type="button">个人信息</button>
               <button class="dropdown-item" type="button" onclick="logout()">退出</button>
               <script>
                   function logout(){
