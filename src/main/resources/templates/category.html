@@ -8,14 +8,39 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
    <title>图书管理系统</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-    <script th:src="@{/js/jquery.js}"></script>
+    <script th:src="@{/js/jquery.slim.min.js}"></script>
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
     
 </head>
 <body>
-	<div class="container mt-5" th:include="navbar">
+	<div class="container mt-5">
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a class="navbar-brand navbar-disabled">图书管理系统</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarText">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                  <a class="nav-link" href="#">所有书籍</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">借阅信息</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#">通知公告</a>
+                </li>
+              </ul>
+              
+              您好,<span class="nav-link navbar-disabled" th:if="${session.user!=null}" th:text="${session.user.username}">
+              </span>
+              <span class="nav-link navbar-disabled" th:if="${session.user==null}">
+                  游客
+            </span>!
+            </div>
+          </nav>
 	</div>
-    <div th:if="${session.user!=null && session.user.usertype == 'admin'}" class="container mt-5">
+    <div class="container mt-5">
         <table class="table table-sm table-bordered">
             <thead>
                 <th>序号</th>
@@ -27,79 +52,8 @@
                 <tr th:each="categories,stats:${categories}">
                     <td th:text="${stats.count}">Trident</td>
                     <td th:text="${categories.name}">Internet</td>
-                    <td><a th:href="@{./edit/}+${categories.id}" class="btn btn-sm btn-primary" 
-                    >编辑</a></td>
-
-                    <td>
-                      <!-- <button class="btn btn-sm btn-danger"
-                    th:id="${categories.id}" th:onclick="deleteCategory(this.getAttribute('id'))">删除</button>
-                    <script>
-                    	function deleteCategory(id){
-                    		$.ajax({
-                          url:"./delete/"+id,
-                          dataType:"text",
-                          type:"GET",
-                          success:function(req){
-                            //获取返回信息
-                            if(req=="true"){
-                              alert("删除成功"),
-                              $("#"+id).parent().remove()
-                            }
-                          },
-                          //成功删除后刷新页面
-                    		success:function(){
-                    			location.href='[[@{/category/getcat}]]'
-                    		}
-                        });
-                    	}
-                    </script> -->
-
-
-                      <!-- Button trigger modal -->
-                      <button th:if="${session.user!=null && session.user.usertype == 'admin'}" type="button" class="btn btn-danger btn-sm" data-toggle="modal" th:data-target="'#exampleModal-'+${categories.id}">
-                        删除
-                    </button>
-                    
-                    <!-- Modal -->
-                    <div class="modal fade" th:id="'exampleModal-'+${categories.id}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">删除</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                            </div>
-                            <div class="modal-body">
-                                确认要删除类别“[[${categories.name}]]”吗？
-                            </div>
-                            <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">取消</button>
-                            <button type="button" class="btn btn-danger" th:id="${categories.id}" th:onclick="deleteCategory(this.getAttribute('id'))">确认删除</button>
-                            </div>
-                        </div>
-                        </div>
-                    </div>
-                    <!-- 模态框结束 -->
-                  </td>
-                    <script>
-                  function deleteCategory(id){
-                    $.ajax({
-                      url:"./delete/"+id,
-                      dataType:"text",
-                      type:"GET",
-                      success:function(req){
-                        //获取返回信息
-                        if(req=="true"){
-                          alert("删除成功"),
-                          $("#"+id).parent().remove(),
-                          location.href='[[@{/category/getcat}]]'
-                        }
-                      },
-                    });
-                  }
-                    </script>
-
+                    <td><a href="#" class="btn btn-sm btn-primary">编辑</a></td>
+                    <td><a href="#" class="btn btn-sm btn-danger">删除</a></td>
                   </td>
                 </tr>   
             </tbody>

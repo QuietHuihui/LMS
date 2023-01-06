@@ -8,7 +8,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
    <title>图书管理系统</title>
     <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
-    <script th:src="@{/js/jquery.js}"></script>
+    <script th:src="@{/js/jquery.slim.min.js}"></script>
     <script th:src="@{/js/bootstrap.bundle.min.js}"></script>
     
 </head>
@@ -29,7 +29,6 @@
                 <label for="amount">数量</label>
                 <input type="text" name="amount" placeholder="输入数量" class="form-control">
     
-    			
     
                 <label for="tcategory">添加一个类别</label>
                 <select name="tcategory" id="tcategory" class="form-control" required>
@@ -43,14 +42,13 @@
                 <div class="container">
                     <div class="row">
                     <div class="col-md-4">
-                        <label for="cover">封面(大小不超过1MB)</label>
+                        <label for="cover">封面</label>
                         <input type="file" name="photo" accept="image/*" class="form-control" required>
                     </div>
                     </div>    
                 </div>
     
-                <button type="submit" class="btn btn-outline-info mt-4" >添加书籍</button>
-                <a th:href="@{/book/getbook}" type=button class="btn btn-outline-info mt-4">查看书籍</a>
+                <button type="submit" class="btn btn-outline-info mt-4">添加书籍</button>
     
             </form>
         </div>
