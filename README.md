@@ -6,7 +6,7 @@
 
 ## Springboot+JpaRepository+Thymeleaf
 </br>
-![alt text](https://github.com/QuietHuihui/LMS/tree/master/img-folder/LMS.PNG?raw=true)
+![alt text](https://github.com/QuietHuihui/LMS/blob/master/img-folder/LMS.PNG?raw=true)
 </br>
 ## 源码使用方法
 首先将代码解压，然后打开Spring Tool Suite4, 点击import existing maven project ,便可以将此项目导入。 之后再右键项目，Run As中选择Springboot App便可以实现。
