@@ -7,7 +7,7 @@
 ## Springboot+JpaRepository+Thymeleaf
 </br>
 </br>
-![alt text](https://github.com/QuietHuihui/LMS/blob/master/img-folder/LMS.PNG?raw=true)
+<img src="https://github.com/QuietHuihui/LMS/blob/master/img-folder/LMS.PNG?raw=true" alt="Alt text" title="图书管理系统">
 
 
 ## 源码使用方法
